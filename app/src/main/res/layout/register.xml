@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/registerTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/registration"
         android:textAlignment="center"
@@ -16,11 +16,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.245" />
+        app:layout_constraintVertical_bias="0.245"
+        android:layout_marginHorizontal="50dp"/>
 
     <EditText
         android:id="@+id/registerEmailEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/address_email_com"
         android:inputType="textEmailAddress"
@@ -28,11 +29,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registerTextView"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="0.125"
+        android:layout_marginHorizontal="50dp"/>
 
     <EditText
         android:id="@+id/registerPasswordEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/address_email_com"
         android:inputType="textPassword"
@@ -40,11 +42,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerEmailEditText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginHorizontal="50dp"/>
 
     <EditText
         android:id="@+id/registerPasswordAgainEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/address_email_com"
         android:inputType="textPassword"
@@ -52,13 +55,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPasswordEditText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginHorizontal="50dp"/>
 
     <Button
         android:id="@+id/registerAcceptButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/apply"
+        android:layout_marginHorizontal="50dp"
         app:layout_constraintBottom_toTopOf="@+id/registerCancelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,8 +71,9 @@
 
     <Button
         android:id="@+id/registerCancelButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginBottom="168dp"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"

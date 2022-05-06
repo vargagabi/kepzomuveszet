@@ -7,8 +7,9 @@
 
     <TextView
         android:id="@+id/registerTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:text="@string/registration"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -20,8 +21,9 @@
 
     <EditText
         android:id="@+id/registerEmailEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:hint="@string/address_email_com"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,8 +34,9 @@
 
     <EditText
         android:id="@+id/registerPasswordEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:hint="@string/address_email_com"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,8 +47,9 @@
 
     <EditText
         android:id="@+id/registerPasswordAgainEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:hint="@string/address_email_com"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,8 +60,9 @@
 
     <Button
         android:id="@+id/registerAcceptButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:text="@string/apply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +73,9 @@
 
     <Button
         android:id="@+id/registerCancelButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
