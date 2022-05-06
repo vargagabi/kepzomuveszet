@@ -36,7 +36,7 @@
         android:id="@+id/registerPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/address_email_com"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -49,7 +49,7 @@
         android:id="@+id/registerPasswordAgainEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/address_email_com"
+        android:hint="@string/password_again"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -67,7 +67,9 @@
         app:layout_constraintBottom_toTopOf="@+id/registerCancelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPasswordAgainEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPasswordAgainEditText"
+        android:onClick="onRegisterAccept"
+        />
 
     <Button
         android:id="@+id/registerCancelButton"
@@ -80,7 +82,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPasswordAgainEditText"
-        app:layout_constraintVertical_bias="0.625" />
+        app:layout_constraintVertical_bias="0.625"
+        android:onClick="onRegisterCancel"
+        tools:ignore="UsingOnClickInXml" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
