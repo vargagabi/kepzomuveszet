@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">kepzomuveszet</string>
+    <string name="registration">Registration</string>
+    <string name="address_email_com">address@email.com</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="password_again">Password again</string>
 </resources>
