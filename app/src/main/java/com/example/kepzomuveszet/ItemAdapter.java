@@ -26,11 +26,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private Context context;
     private FirebaseFirestore firestore;
     private int lastPosition = -1;
+    private NotificationHandler notificationHandler;
 
     ItemAdapter(Context context, ArrayList<MyItem> itemsData){
         this.itemsData=itemsData;
         this.context=context;
         firestore = FirebaseFirestore.getInstance();
+        notificationHandler = new NotificationHandler(context);
     }
 
     @NonNull
@@ -110,6 +112,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                             public void onAnimationEnd(Animation animation) {
                                 deleteItem(id);
                                 itemsData.remove(position);
+                                notificationHandler.send("Item out of stock: " + currentItem.getName());
                             }
 
                             @Override
