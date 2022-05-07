@@ -5,10 +5,22 @@ public class MyItem {
     private String name;
     private String description;
     private int price;
-    private String amount;
+    private int amount;
 //    private String imgRes;
 
-    public MyItem(String name, String description, int price, String amount) {
+    @Override
+    public String toString() {
+        return "MyItem{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", amount=" + amount +
+                '}';
+    }
+
+    public MyItem(String id,String name, String description, int price, int amount) {
+        this.id=id;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -16,11 +28,11 @@ public class MyItem {
 //        this.imgRes = imgRes;
     }
 
-    public String getId() {
+    String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    void setId(String id) {
         this.id = id;
     }
 
@@ -56,11 +68,11 @@ public class MyItem {
         this.price = price;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 }

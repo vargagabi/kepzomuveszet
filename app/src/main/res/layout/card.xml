@@ -1,68 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_gravity="center">
 
     <LinearLayout
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
          android:layout_width="match_parent"
         android:orientation="vertical">
-<!--        <ImageView-->
+
+        <!--        <ImageView-->
 <!--            android:id="@+id/cardImage"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            android:layout_margin="10dp"-->
 <!--            android:layout_gravity="center"-->
 <!--            />-->
-        <TextView
-            android:id="@+id/cardItemNameTextView"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/item_name"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            />
-        <TextView
-            android:id="@+id/cardItemPriceTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/item_price"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            />
-        <TextView
-            android:id="@+id/cardItemAmountTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/item_amount"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            />
-        <TextView
-            android:id="@+id/cardItemDescriptionTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/item_descritpion"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:lines="5"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            />
+            android:layout_height="match_parent"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/cardItemNameLabel"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/item_name"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cardItemNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/cardItemNameLabel"
+                android:text="@string/item_name"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/cardItemPriceLabel"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardItemNameLabel"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/item_price"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cardItemPriceTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/cardItemNameTextView"
+                android:layout_alignParentEnd="true"
+
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/cardItemPriceLabel"
+                android:text="@string/item_price"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cardItemAmountLabel"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardItemPriceLabel"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/item_amount"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cardItemAmountTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/cardItemPriceTextView"
+                android:layout_alignParentEnd="true"
+
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/cardItemAmountLabel"
+                android:text="@string/item_amount"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/cardItemDescriptionLabel"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardItemAmountLabel"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/item_price"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cardItemDescriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/cardItemAmountTextView"
+                android:layout_alignParentEnd="true"
+
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/cardItemDescriptionLabel"
+                android:lines="5"
+                android:text="@string/item_descritpion"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
         <Button
             android:id="@+id/cardCartButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="10dp"
             android:onClick="onCartButton"
             android:text="@string/shop" />
 

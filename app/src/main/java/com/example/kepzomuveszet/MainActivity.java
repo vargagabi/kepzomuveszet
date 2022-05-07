@@ -71,11 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onShopButton(View view) {
-        if(user!=null){
-            Log.i(LOG_TAG,"IN");
-        }else{
-            Log.i(LOG_TAG,"OUT");
-        }
+        startActivity(new Intent(this,ShopActivity.class));
     }
 
     public void onLogoutButton(View view) {

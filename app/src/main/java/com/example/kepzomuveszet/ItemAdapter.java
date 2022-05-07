@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private ArrayList<MyItem> itemsData;
     private ArrayList<MyItem> itemsAll;
     private Context context;
-    private int lastPosition = -1;
 
     ItemAdapter(Context context, ArrayList<MyItem> itemsData){
         this.itemsData=itemsData;
@@ -53,14 +51,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private TextView priceText;
         private TextView amountText;
         private TextView descriptionText;
-        private ImageView img;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nameText = itemView.findViewById(R.id.cardItemNameTextView);
             amountText = itemView.findViewById(R.id.cardItemAmountTextView);
             priceText = itemView.findViewById(R.id.cardItemPriceTextView);
             descriptionText = itemView.findViewById(R.id.cardItemDescriptionTextView);
-//            img = itemView.findViewById(R.id.cardImage);
             itemView.findViewById(R.id.cardCartButton).setOnClickListener(new View.OnClickListener(){
 
                 @Override
@@ -71,9 +67,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         }
 
         public void bindTo(MyItem currentItem) {
+            Log.i(LOG_TAG,"BINDTO: "+currentItem.getName());
             nameText.setText(currentItem.getName());
-            amountText.setText(currentItem.getAmount());
-            priceText.setText(currentItem.getPrice());
+            amountText.setText(Integer.toString(currentItem.getAmount()));
+            priceText.setText(Integer.toString(currentItem.getPrice()));
             descriptionText.setText(currentItem.getDescription());
 
         }
