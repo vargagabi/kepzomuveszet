@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    //TODO:shared preferencesbe az emailt eltarolni mert be van jelentkezve egy user?
                     if(task.isSuccessful()){
                         Toast.makeText(LoginActivity.this,"Sikeres bejelentkezes",Toast.LENGTH_LONG).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));

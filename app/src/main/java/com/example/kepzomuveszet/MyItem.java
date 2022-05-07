@@ -6,7 +6,6 @@ public class MyItem {
     private String description;
     private int price;
     private int amount;
-//    private String imgRes;
 
     @Override
     public String toString() {

@@ -87,25 +87,37 @@ public class ShopActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
 
-//        IntentFilter intentFilter = new IntentFilter();
-//        intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
-//        this.registerReceiver(receiver,intentFilter);
-
         readAll();
     }
 
-//    BroadcastReceiver receiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            String action = intent.getAction();
-//            Log.i(LOG_TAG,"CONF CHANGED MY MAN");
-//            if(ShopActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-//                gridNumber=2;
-//            }else{
-//                gridNumber=1;
-//            }
-//        }
-//    };
+    //lekerdezi azokat az itemeket amelyekbol max 10 db-van es ezert ritkak
+    private void getRareItems(){
+        firestore.collection("Items").whereLessThanOrEqualTo("amount",10).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document: task.getResult()){
+//                                Log.i(LOG_TAG, document.getId() + "=>" + document.getData());
+
+                                itemsData.add(new MyItem(
+                                                document.getId(),
+                                                document.getData().get("name").toString(),
+                                                document.getData().get("description").toString(),
+                                                Integer.parseInt(document.getData().get("price").toString()),
+                                                Integer.parseInt(document.getData().get("amount").toString())
+                                        )
+                                );
+                            }
+
+                            recyclerView.setAdapter(itemAdapter);
+                        }else{
+                            Log.i(LOG_TAG,"Error downloading items: " +task.getException().getMessage());
+
+                        }
+                    }
+                });
+    }
 
     //CRUD: READ
     private void readAll() {
@@ -154,12 +166,7 @@ public class ShopActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        unregisterReceiver(receiver);
-//    }
-
+    //item feltoltese a shop-ba
     public void onShopAdd(View view) {
         String name = itemName.getText().toString();
         String desc = itemDescription.getText().toString();
@@ -189,7 +196,7 @@ public class ShopActivity extends AppCompatActivity {
 
 
     }
-
+    //valtas az itemek listazasa es item hozzaadasaa kozott
     public void onSwitchButton(View view) {
         String text = switchButton.getText().toString();
         if(text.equals("Add item")){
@@ -202,4 +209,5 @@ public class ShopActivity extends AppCompatActivity {
             switchButton.setText("Add item");
         }
     }
+
 }

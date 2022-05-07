@@ -63,11 +63,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLoginButton(View view) {
-        Log.i(LOG_TAG,"login start");
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
         isUserLoggedIn();
-        Log.i(LOG_TAG,"login end");
     }
 
     public void onShopButton(View view) {
@@ -76,9 +74,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void onLogoutButton(View view) {
         firebaseAuth.signOut();
+        Log.i(LOG_TAG,"logout");
         finish();
         overridePendingTransition(0, 0);
         startActivity(new Intent(this,MainActivity.class));
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        user.reload();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(LOG_TAG,"onResume");
+        isUserLoggedIn();
     }
 }
