@@ -7,6 +7,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+
     <TextView
         android:id="@+id/mainTextView"
         android:layout_width="match_parent"
@@ -44,8 +45,17 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="168dp"
         android:onClick="onRegisterButton"
         android:text="@string/register" />
 
+    <Button
+        android:id="@+id/mainLogoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="168dp"
+        android:onClick="onLogoutButton"
+        android:text="@string/logout" />
 </LinearLayout>

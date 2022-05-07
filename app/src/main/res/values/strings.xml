@@ -10,4 +10,9 @@
     <string name="main_page">Main page</string>
     <string name="shop">Shop</string>
     <string name="register">Register</string>
+    <string name="logout">Logout</string>
+    <string name="item_name">Item name</string>
+    <string name="item_amount">Item amount</string>
+    <string name="item_price">Item price</string>
+    <string name="item_descritpion">Item descritpion</string>
 </resources>
