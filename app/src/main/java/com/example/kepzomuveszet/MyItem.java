@@ -28,6 +28,13 @@ public class MyItem {
 //        this.imgRes = imgRes;
     }
 
+    public MyItem(String name, String description, int price, int amount) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.amount = amount;
+    }
+
     String getId() {
         return id;
     }

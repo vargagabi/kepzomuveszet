@@ -5,9 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,10 +36,28 @@ public class ShopActivity extends AppCompatActivity {
     private FirebaseUser user;
     RecyclerView recyclerView;
     private ArrayList<MyItem> itemsData;
-    private int gridNumber = 2;
+    private int gridNumber = 1;
     private ItemAdapter itemAdapter;
     private FirebaseFirestore firestore;
     private CollectionReference collectionReference;
+
+    //add item adattagok
+    EditText itemName;
+    EditText itemPrice;
+    EditText itemDescription;
+    EditText itemAmount;
+    LinearLayout shopAddItemLayout;
+    Button switchButton;
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            gridNumber=3;
+        }else{
+            gridNumber=1;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +68,14 @@ public class ShopActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
+        itemName=findViewById(R.id.shopItemNameEditText);
+        itemPrice=findViewById(R.id.shopItemPriceEditText);
+        itemDescription=findViewById(R.id.shopItemDescriptionEditText);
+        itemAmount = findViewById(R.id.shopItemAmountEditText);
+        shopAddItemLayout = findViewById(R.id.shopAddItemLayout);
+        switchButton = findViewById(R.id.shopSwitchButton);
 
-
+        shopAddItemLayout.setVisibility(View.GONE);
 //        if(user==null){
 //            finish();
 //        }
@@ -62,6 +92,8 @@ public class ShopActivity extends AppCompatActivity {
 
         readAll();
     }
+
+
     //CRUD: READ
     private void readAll() {
         firestore.collection("Items").get()
@@ -111,9 +143,60 @@ public class ShopActivity extends AppCompatActivity {
         });
 
     }
+    //CRUD: Update
+    public void updateItem(MyItem oldItem,MyItem newItem){
+        DocumentReference ref = firestore.collection("Item").document(oldItem.getId());
+        ref.update("name",newItem.getName());
+        ref.update("description",newItem.getDescription());
+        ref.update("price",newItem.getPrice());
+        ref.update("amount",newItem.getAmount());
+
+    }
 
     public void onCartButton(View view) {
 
+    }
 
+    public void onShopAdd(View view) {
+        String name = itemName.getText().toString();
+        String desc = itemDescription.getText().toString();
+        String price = itemPrice.getText().toString();
+        String amount = itemAmount.getText().toString();
+        if(!name.isEmpty() && !desc.isEmpty() && !price.isEmpty() && !amount.isEmpty()){
+            Log.i(LOG_TAG,"ADDED ITEM TEST");
+            Log.i(LOG_TAG,"price: " + price + "amount: " + amount);
+            int priceInt = 0;
+            int amountInt = 0;
+            try {
+                priceInt = Integer.parseInt(price);
+                amountInt = Integer.parseInt(amount);
+
+            }catch (Exception e){
+                return;
+            }
+            MyItem item = new MyItem(name,desc,priceInt,amountInt);
+            createItem(item);
+            //reload activity es valtas az itemek kiirasara
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(new Intent(this,ShopActivity.class));
+            overridePendingTransition(0, 0);
+            switchButton.setText("Add Item");
+        }
+
+
+    }
+
+    public void onSwitchButton(View view) {
+        String text = switchButton.getText().toString();
+        if(text.equals("Add item")){
+            recyclerView.setVisibility(View.GONE);
+            shopAddItemLayout.setVisibility(View.VISIBLE);
+            switchButton.setText("Show items");
+        }else{
+            recyclerView.setVisibility(View.VISIBLE);
+            shopAddItemLayout.setVisibility(View.GONE);
+            switchButton.setText("Add item");
+        }
     }
 }

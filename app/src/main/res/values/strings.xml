@@ -15,4 +15,7 @@
     <string name="item_amount">Item amount</string>
     <string name="item_price">Item price</string>
     <string name="item_descritpion">Item descritpion</string>
+    <string name="add">Add</string>
+    <string name="add_item">Add item</string>
+    <string name="buy">Buy</string>
 </resources>
