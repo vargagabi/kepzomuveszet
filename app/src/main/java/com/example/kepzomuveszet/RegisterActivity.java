@@ -17,16 +17,19 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-    }
 
-    public void onRegisterCancel(View view) {
-        startActivity(new Intent(this,));
-    }
-
-    public void onRegisterAccept(View view) {
+        //adattagok kezelese
         registerEmailET = findViewById(R.id.registerEmailEditText);
         registerPasswordET = findViewById(R.id.registerPasswordEditText);
         registerPasswordAgainET =findViewById(R.id.registerPasswordAgainEditText);
+    }
+
+    public void onRegisterCancel(View view) {
+        finish();
+    }
+
+    public void onRegisterAccept(View view) {
+
 
         Log.i(LOG_TAG,registerEmailET.getText().toString()+", "+registerPasswordET.getText().toString()+", "+registerPasswordAgainET.getText().toString());
     }
