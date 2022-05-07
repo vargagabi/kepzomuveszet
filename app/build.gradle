@@ -11,6 +11,7 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 1
+        multiDexEnabled true
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -42,4 +43,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
+    implementation "com.github.bumptech.glide:glide:3.7.0"
+    implementation "com.google.firebase:firebase-firestore:24.1.2"
+    implementation "com.android.support:multidex:1.0.3"
 }

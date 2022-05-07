@@ -8,8 +8,15 @@
         android:layout_height="match_parent"
          android:layout_width="match_parent"
         android:orientation="vertical">
+<!--        <ImageView-->
+<!--            android:id="@+id/cardImage"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            />-->
         <TextView
-            android:id="@+id/shopItemNameTextView"
+            android:id="@+id/cardItemNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/item_name"
@@ -19,7 +26,7 @@
             android:layout_gravity="center_horizontal"
             />
         <TextView
-            android:id="@+id/shopItemPriceTextView"
+            android:id="@+id/cardItemPriceTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/item_price"
@@ -29,7 +36,7 @@
             android:layout_gravity="center_horizontal"
             />
         <TextView
-            android:id="@+id/shopItemAmountTextView"
+            android:id="@+id/cardItemAmountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/item_amount"
@@ -39,7 +46,7 @@
             android:layout_gravity="center_horizontal"
             />
         <TextView
-            android:id="@+id/shopItemDescriptionTextView"
+            android:id="@+id/cardItemDescriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/item_descritpion"
@@ -50,7 +57,7 @@
             android:layout_gravity="center_horizontal"
             />
         <Button
-            android:id="@+id/shopCartButton"
+            android:id="@+id/cardCartButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
