@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,10 +39,9 @@ public class ShopActivity extends AppCompatActivity {
     private FirebaseUser user;
     RecyclerView recyclerView;
     private ArrayList<MyItem> itemsData;
-    private int gridNumber = 1;
+    private int gridNumber=1;
     private ItemAdapter itemAdapter;
     private FirebaseFirestore firestore;
-    private CollectionReference collectionReference;
 
     //add item adattagok
     EditText itemName;
@@ -49,15 +51,6 @@ public class ShopActivity extends AppCompatActivity {
     LinearLayout shopAddItemLayout;
     Button switchButton;
 
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            gridNumber=3;
-        }else{
-            gridNumber=1;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +72,13 @@ public class ShopActivity extends AppCompatActivity {
 //        if(user==null){
 //            finish();
 //        }
-
+        if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Log.i(LOG_TAG,"LANDSCAPE");
+            gridNumber=2;
+        }else{
+            Log.i(LOG_TAG,"PORTRAIT");
+            gridNumber=1;
+        }
         recyclerView = findViewById(R.id.shopRecycleView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, gridNumber));
         itemsData = new ArrayList<>();
@@ -87,22 +86,36 @@ public class ShopActivity extends AppCompatActivity {
 
 
         firestore = FirebaseFirestore.getInstance();
-        collectionReference = firestore.collection("Items");
 
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+//        this.registerReceiver(receiver,intentFilter);
 
         readAll();
     }
 
+//    BroadcastReceiver receiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            Log.i(LOG_TAG,"CONF CHANGED MY MAN");
+//            if(ShopActivity.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+//                gridNumber=2;
+//            }else{
+//                gridNumber=1;
+//            }
+//        }
+//    };
 
     //CRUD: READ
     private void readAll() {
-        firestore.collection("Items").get()
+        firestore.collection("Items").orderBy("name").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document: task.getResult()){
-                                Log.i(LOG_TAG, document.getId() + "=>" + document.getData());
+//                                Log.i(LOG_TAG, document.getId() + "=>" + document.getData());
 
                                 itemsData.add(new MyItem(
                                         document.getId(),
@@ -115,9 +128,6 @@ public class ShopActivity extends AppCompatActivity {
                             }
 
                             recyclerView.setAdapter(itemAdapter);
-                            for(MyItem item : itemsData){
-                                Log.i(LOG_TAG, item.toString());
-                            }
                         }else{
                             Log.i(LOG_TAG,"Error downloading items: " +task.getException().getMessage());
 
@@ -143,19 +153,12 @@ public class ShopActivity extends AppCompatActivity {
         });
 
     }
-    //CRUD: Update
-    public void updateItem(MyItem oldItem,MyItem newItem){
-        DocumentReference ref = firestore.collection("Item").document(oldItem.getId());
-        ref.update("name",newItem.getName());
-        ref.update("description",newItem.getDescription());
-        ref.update("price",newItem.getPrice());
-        ref.update("amount",newItem.getAmount());
 
-    }
-
-    public void onCartButton(View view) {
-
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        unregisterReceiver(receiver);
+//    }
 
     public void onShopAdd(View view) {
         String name = itemName.getText().toString();

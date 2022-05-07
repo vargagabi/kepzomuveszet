@@ -1,14 +1,12 @@
 package com.example.kepzomuveszet;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +25,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private ArrayList<MyItem> itemsData;
     private Context context;
     private FirebaseFirestore firestore;
+    private int lastPosition = -1;
 
     ItemAdapter(Context context, ArrayList<MyItem> itemsData){
         this.itemsData=itemsData;
@@ -45,6 +44,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         MyItem currentItem = itemsData.get(position);
 
         holder.bindTo(currentItem,position);
+
+        if(holder.getAbsoluteAdapterPosition() > lastPosition){
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_from_left);
+            holder.itemView.startAnimation(animation);
+            lastPosition=holder.getAbsoluteAdapterPosition();
+        }
+
     }
 
     @Override
@@ -57,6 +63,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private TextView priceText;
         private TextView amountText;
         private TextView descriptionText;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nameText = itemView.findViewById(R.id.cardItemNameTextView);
@@ -89,10 +96,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                         Log.i(LOG_TAG,"ITEM UPDATED: " + id + ", " + currentAmount);
                         notifyItemChanged(position);
                     }else{
-                        deleteItem(id);
                         Log.i(LOG_TAG,"ITEM DELETED" + id);
-                        itemsData.remove(position);
-                        notifyItemRemoved(position);
+
+                        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_to_right);
+                        itemView.startAnimation(animation);
+                        animation.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                                notifyItemRemoved(position);
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                deleteItem(id);
+                                itemsData.remove(position);
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+
+                            }
+                        });
                     }
 
                 }
