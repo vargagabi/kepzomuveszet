@@ -112,7 +112,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                             public void onAnimationEnd(Animation animation) {
                                 deleteItem(id);
                                 itemsData.remove(position);
-                                notificationHandler.send("Item out of stock: " + currentItem.getName());
+                                notificationHandler.send("Elfogyott: " + currentItem.getName());
                             }
 
                             @Override

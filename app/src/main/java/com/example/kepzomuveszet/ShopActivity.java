@@ -112,7 +112,7 @@ public class ShopActivity extends AppCompatActivity {
 
                             recyclerView.setAdapter(itemAdapter);
                         }else{
-                            Log.i(LOG_TAG,"Error downloading items: " +task.getException().getMessage());
+                            Log.i(LOG_TAG,"Nem sikerült letölteni az adatokat: " +task.getException().getMessage());
 
                         }
                     }
@@ -173,8 +173,6 @@ public class ShopActivity extends AppCompatActivity {
         String price = itemPrice.getText().toString();
         String amount = itemAmount.getText().toString();
         if(!name.isEmpty() && !desc.isEmpty() && !price.isEmpty() && !amount.isEmpty()){
-            Log.i(LOG_TAG,"ADDED ITEM TEST");
-            Log.i(LOG_TAG,"price: " + price + "amount: " + amount);
             int priceInt = 0;
             int amountInt = 0;
             try {
@@ -199,14 +197,14 @@ public class ShopActivity extends AppCompatActivity {
     //valtas az itemek listazasa es item hozzaadasaa kozott
     public void onSwitchButton(View view) {
         String text = switchButton.getText().toString();
-        if(text.equals("Add item")){
+        if(text.equals("Hozzáad")){
             recyclerView.setVisibility(View.GONE);
             shopAddItemLayout.setVisibility(View.VISIBLE);
-            switchButton.setText("Show items");
+            switchButton.setText(R.string.keszlet);
         }else{
             recyclerView.setVisibility(View.VISIBLE);
             shopAddItemLayout.setVisibility(View.GONE);
-            switchButton.setText("Add item");
+            switchButton.setText(R.string.hozzaad);
         }
     }
 

@@ -55,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this,"Sikeres bejelentkezes",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this,"Sikeres bejelentkezés",Toast.LENGTH_LONG).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else{
-                        Toast.makeText(LoginActivity.this,"Failed to log in: " + task.getException().getMessage(),Toast.LENGTH_LONG);
+                        Toast.makeText(LoginActivity.this,"Sikertelen bejelentkezés: " + task.getException().getMessage(),Toast.LENGTH_LONG);
 
                     }
                 }

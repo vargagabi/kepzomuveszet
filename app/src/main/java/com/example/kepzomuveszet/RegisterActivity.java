@@ -57,10 +57,10 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(RegisterActivity.this,"Sikeres regisztracio, kerlek jelentkezz ben",Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this,"Sikeres regisztráció, kérlek jelentkezz be",Toast.LENGTH_LONG).show();
                         finish();
                     }else{
-                        Toast.makeText(RegisterActivity.this,"Sikerestelen regisztracio: " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this,"Sikertelen regisztráció: " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
                     }
                 }
             });

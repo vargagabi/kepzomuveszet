@@ -33,7 +33,7 @@ public class NotificationHandler {
 
     public void send(String message){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,CHANNEL_ID)
-                .setContentTitle("Shop application")
+                .setContentTitle("Képzőművészet webshop")
                 .setContentText(message)
                 .setSmallIcon(R.drawable.ic_message_foreground);
         this.notificationManager.notify(0, builder.build());

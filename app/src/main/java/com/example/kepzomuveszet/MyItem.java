@@ -24,7 +24,6 @@ public class MyItem {
         this.description = description;
         this.price = price;
         this.amount = amount;
-//        this.imgRes = imgRes;
     }
 
     public MyItem(String name, String description, int price, int amount) {
@@ -42,13 +41,7 @@ public class MyItem {
         this.id = id;
     }
 
-//    public String getImgRes() {
-//        return imgRes;
-//    }
-//
-//    public void setImgRes(String imgRes) {
-//        this.imgRes = imgRes;
-//    }
+
 
     public String getName() {
         return name;
