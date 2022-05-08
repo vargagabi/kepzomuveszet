@@ -3,6 +3,7 @@ package com.example.kepzomuveszet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +17,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String LOG_TAG=MainActivity.class.getName()+"logcat";
+    private static final String PREF_KEY=MainActivity.class.getPackage().toString()
+            ;
     EditText registerEmailET;
     EditText registerPasswordET;
     EditText registerPasswordAgainET;
 
     private FirebaseAuth firebaseAuth;
-
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,10 @@ public class RegisterActivity extends AppCompatActivity {
         registerEmailET = findViewById(R.id.registerEmailEditText);
         registerPasswordET = findViewById(R.id.registerPasswordEditText);
         registerPasswordAgainET =findViewById(R.id.registerPasswordAgainEditText);
+
+        preferences = getSharedPreferences(PREF_KEY,MODE_PRIVATE);
+        registerEmailET.setText(preferences.getString("email",""));
+        registerPasswordET.setText(preferences.getString("password",""));
 
         //firebase adattagok
         firebaseAuth = FirebaseAuth.getInstance();

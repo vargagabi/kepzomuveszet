@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String LOG_TAG= LoginActivity.class.getName()+"logcat";
+    private static final String PREF_KEY=LoginActivity.class.getPackage().toString();
     EditText loginEmailET;
     EditText loginPasswordET;
 
@@ -29,8 +31,20 @@ public class LoginActivity extends AppCompatActivity {
         loginEmailET = findViewById(R.id.loginEmailEditText);
         loginPasswordET = findViewById(R.id.loginPasswordEditText);
 
+        preferences = getSharedPreferences(PREF_KEY,MODE_PRIVATE);
+
+
         //firebase adattagok
         firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("email",loginEmailET.getText().toString());
+        editor.putString("password", loginPasswordET.getText().toString());
+        editor.apply();
     }
 
     public void onLoginAccept(View view) {
@@ -45,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else{
                         Toast.makeText(LoginActivity.this,"Failed to log in: " + task.getException().getMessage(),Toast.LENGTH_LONG);
+
                     }
                 }
             });
@@ -53,5 +68,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginCancel(View view) {
         finish();
+    }
+
+    public void onLoginRegister(View view) {
+        startActivity(new Intent(this,RegisterActivity.class));
     }
 }
