@@ -57,10 +57,15 @@ public class ShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop);
 
+
         //firebase adattagok
         firebaseAuth=FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
+        if(user==null){
+            finish();
+            Toast.makeText(this,"A termékek megtekintéséhez jelentkezz be",Toast.LENGTH_LONG).show();
+        }
         itemName=findViewById(R.id.shopItemNameEditText);
         itemPrice=findViewById(R.id.shopItemPriceEditText);
         itemDescription=findViewById(R.id.shopItemDescriptionEditText);
@@ -69,9 +74,7 @@ public class ShopActivity extends AppCompatActivity {
         switchButton = findViewById(R.id.shopSwitchButton);
 
         shopAddItemLayout.setVisibility(View.GONE);
-//        if(user==null){
-//            finish();
-//        }
+
         if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             Log.i(LOG_TAG,"LANDSCAPE");
             gridNumber=2;

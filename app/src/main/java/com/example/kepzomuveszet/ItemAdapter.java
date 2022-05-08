@@ -102,26 +102,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
                         Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_to_right);
                         itemView.startAnimation(animation);
-                        animation.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-                                notifyItemRemoved(position);
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                deleteItem(id);
-                                itemsData.remove(position);
-                                notificationHandler.send("Elfogyott: " + currentItem.getName());
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-
-                            }
-                        });
+                        Log.i(LOG_TAG,"before animation");
+                        deleteItem(id);
+                        itemsData.remove(position);
+                        notificationHandler.send("Elfogyott: " + currentItem.getName());
+                        notifyItemRemoved(position);
                     }
-
                 }
             });
 

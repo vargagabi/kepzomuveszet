@@ -1,6 +1,7 @@
 package com.example.kepzomuveszet;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -40,21 +41,55 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void isUserLoggedIn(){
-        if(user != null){
-            Log.i(LOG_TAG,"USER IS LOGGED IN");
-            loginBTN.setVisibility(View.GONE);
-            registerBTN.setVisibility(View.GONE);
-            logoutBTN.setVisibility(View.VISIBLE);
-        }else{
+        if(user ==null){
             Log.i(LOG_TAG,"NO USER");
             loginBTN.setVisibility(View.VISIBLE);
             registerBTN.setVisibility(View.VISIBLE);
             logoutBTN.setVisibility(View.GONE);
+
+        }else{
+            Log.i(LOG_TAG,"USER IS LOGGED IN");
+            loginBTN.setVisibility(View.GONE);
+            registerBTN.setVisibility(View.GONE);
+            logoutBTN.setVisibility(View.VISIBLE);
         }
     }
 
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        if(user != null){
+            user.reload();
+        }
+        isUserLoggedIn();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(user != null){
+            user.reload();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(user != null){
+            user.reload();
+        }
+        isUserLoggedIn();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirebaseAuth.getInstance().signOut();
+
+    }
 
     public void onRegisterButton(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
@@ -64,8 +99,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void onLoginButton(View view) {
         Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,2);
         isUserLoggedIn();
+    }
+
+
+    //ha sikeres a bejelentkezes reloadoljuk a main-t ha visszalep az user
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 2){
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(new Intent(this,MainActivity.class));
+            overridePendingTransition(0, 0);
+        }
     }
 
     public void onShopButton(View view) {
@@ -81,22 +129,6 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        user.reload();
 
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(LOG_TAG,"onResume");
-        isUserLoggedIn();
-    }
 }
