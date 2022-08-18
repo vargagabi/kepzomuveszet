@@ -1,10 +1,5 @@
-# kepzomuveszet
-Mobil projektmunka
-Segítség a javításhoz:
+This is an android school project.
+Project goals:
+-An android app for an art webshop
+-The user can register, log in, and 'buy' things
 
-
-Animációk hivása: ItemAdapter.java
-Lifecycle: MainActivity, LoginActivity
-Notification: NotificationHandler, ItemAdapter
-CRUD: ItemAdapter, ShopActivity
-Komplex lekérdezések: ShopActivity => readAll(), getRareItems()
